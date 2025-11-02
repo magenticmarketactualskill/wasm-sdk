@@ -1,0 +1,43 @@
+{
+  "name": "wasm-sdk-core-js",
+  "version": "0.1.0",
+  "description": "Boa-based JavaScript engine for the JavaScript community - WASM SDK Core",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "example": "node examples/basic-usage.js"
+  },
+  "keywords": [
+    "wasm",
+    "wasi",
+    "boa",
+    "javascript",
+    "runtime",
+    "webassembly"
+  ],
+  "author": "WASM-SDK Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wasm-sdk/wasm-sdk-core-js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "testMatch": [
+      "**/test/**/*.test.js"
+    ]
+  }
+}

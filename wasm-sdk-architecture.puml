@@ -1,0 +1,103 @@
+@startuml WASM-SDK Architecture
+
+!define RECTANGLE class
+
+skinparam packageStyle rectangle
+skinparam component {
+  BackgroundColor LightBlue
+  BorderColor DarkBlue
+  ArrowColor Black
+}
+
+package "WASM-SDK Platform" {
+  
+  package "Language Bindings" {
+    component "WASM-SDK-CORE\n(Rust)" as CORE
+    component "WASM-SDK-CORE-JS\n(JavaScript)" as COREJS
+    component "WASM-SDK-CORE-TS\n(TypeScript)" as CORETS
+    component "WASM-SDK-CORE-RB\n(Ruby)" as CORERB
+    component "WASM-SDK-CORE-PY\n(Python)" as COREPY
+  }
+  
+  package "Runtime Engines" {
+    component "Wasmtime\nWASI Preview 2" as Wasmtime
+    component "Boa\nJavaScript Engine" as Boa
+    component "Artichoke\nRuby Runtime" as Artichoke
+    component "pyo3\nRust-Python Bindings" as pyo3
+  }
+  
+  package "Core Technologies" {
+    component "Component Model" as CM
+    component "WASI Preview 2" as WASI
+    component "WebAssembly" as WASM
+  }
+}
+
+' Connections from language bindings to engines
+CORE --> Wasmtime
+CORE --> CM
+
+COREJS --> Boa
+COREJS --> WASM
+
+CORETS --> Boa
+CORETS --> WASM
+
+CORERB --> Artichoke
+CORERB --> Boa
+CORERB --> WASM
+
+COREPY --> pyo3
+COREPY --> Boa
+COREPY --> WASM
+
+' Engines to core technologies
+Wasmtime --> WASI
+Wasmtime --> CM
+Wasmtime --> WASM
+
+Boa --> WASM
+Artichoke --> WASM
+pyo3 --> WASM
+
+note right of CORE
+  **Features:**
+  - WASI Preview 2 compatible
+  - Wasmtime integration
+  - Component Model support
+  - jco compatible
+end note
+
+note right of COREJS
+  **Features:**
+  - Boa engine integration
+  - ES6+ support
+  - npm/pnpm compatible
+  - Jest testing
+end note
+
+note right of CORETS
+  **Features:**
+  - Full TypeScript support
+  - Type-safe API
+  - Yarn modern
+  - Strict mode
+end note
+
+note right of CORERB
+  **Features:**
+  - Artichoke + Boa
+  - Dual language support
+  - RSpec + Cucumber
+  - Ruby 3.3.6
+end note
+
+note right of COREPY
+  **Features:**
+  - pyo3 bindings
+  - Native performance
+  - Type hints
+  - pytest testing
+end note
+
+@enduml

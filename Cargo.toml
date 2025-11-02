@@ -1,0 +1,27 @@
+[package]
+name = "wasm-sdk-core"
+version = "0.1.0"
+edition = "2021"
+authors = ["WASM-SDK Team"]
+description = "A WASI Preview 2 compatible runtime for the Rust community"
+license = "MIT"
+repository = "https://github.com/wasm-sdk/wasm-sdk-core"
+keywords = ["wasm", "wasi", "runtime", "component-model"]
+categories = ["wasm", "development-tools"]
+
+[dependencies]
+wasmtime = "26.0"
+wasmtime-wasi = "26.0"
+anyhow = "1.0"
+tokio = { version = "1.40", features = ["full"] }
+
+[dev-dependencies]
+tempfile = "3.13"
+
+[lib]
+name = "wasm_sdk_core"
+path = "src/lib.rs"
+
+[[example]]
+name = "basic_usage"
+path = "examples/basic_usage.rs"
